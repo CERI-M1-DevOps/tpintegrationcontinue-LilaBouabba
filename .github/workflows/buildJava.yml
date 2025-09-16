@@ -3,7 +3,7 @@ name: Java CI with Maven - Test and package
 on:
   pull_request:
     branches:
-      - main   # déclenchement sur Pull Request vers main
+      - main
 
 jobs:
   build:
@@ -21,4 +21,9 @@ jobs:
           java-version: '21'
 
       - name: Build package with Maven
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar-Dsonar.projectKey=$(echo ${{ github.repository }} | sed 's-/-_-')
+        run: mvn -B package
+
+      - name: Analyse SonarCloud
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=$(echo ${{ github.repository }} | sed 's-/-_-')
