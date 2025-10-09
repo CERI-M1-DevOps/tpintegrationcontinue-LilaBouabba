@@ -30,18 +30,25 @@ public class ListeSimple {
         }
     }
 
-    public String toString() {
-        StringBuilder sb = new StringBuilder("ListeSimple(");
-        Noeud n = tete;
-        while (n != null) {
-            sb.append(n);
-            n = n.getSuivant();
-            if (n != null)
-                sb.append(", ");
-        }
-        sb.append(")");
-        return sb.toString();
+    @Override
+public String toString() {
+    // ✅ Si la liste est vide, on renvoie "[]"
+    if (tete == null) {
+        return "[]";
     }
+
+    // ✅ Sinon, on construit la chaîne complète
+    StringBuilder sb = new StringBuilder("ListeSimple(");
+    Noeud n = tete;
+    while (n != null) {
+        sb.append("Noeud(").append(n.getElement()).append(")");
+        n = n.getSuivant();
+        if (n != null)
+            sb.append(", ");
+    }
+    sb.append(")");
+    return sb.toString();
+}
 
     public void supprimePremier(Object element) {
         if (tete != null) {
