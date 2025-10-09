@@ -50,6 +50,9 @@ public String toString() {
     return sb.toString();
 }
 
+
+  //test cache Maven 
+  
     public void supprimePremier(Object element) {
         if (tete != null) {
             if (tete.getElement() == element) {
