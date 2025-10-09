@@ -1,0 +1,32 @@
+name: Generate and Deploy JavaDoc
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  deploy-doc:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout du code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      #  Setup Java
+      - name: Set up Java 21 (Corretto)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '21'
+
+      #  Générer la documentation JavaDoc
+      - name: Generate JavaDoc
+        run: mvn -B javadoc:javadoc
+
+      #  Déployer sur GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/site/apidocs

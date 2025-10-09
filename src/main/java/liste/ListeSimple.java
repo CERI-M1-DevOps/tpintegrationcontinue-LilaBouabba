@@ -4,9 +4,19 @@ public class ListeSimple {
     private long size;
     Noeud tete;
 
+/**
+ * Retourne le nombre d'éléments présents dans la liste.
+ * @return le nombre d'éléments de la liste
+ */
+
     public long getSize() {
         return size;
     }
+    
+ /**
+ * Ajoute un nouvel élément au début de la liste.
+ * @param element l'entier à ajouter dans la liste
+ */
 
     public void ajout(int element) {
         tete = new Noeud(element, tete);
@@ -52,7 +62,7 @@ public String toString() {
 
 
   //test cache Maven 
-  
+
     public void supprimePremier(Object element) {
         if (tete != null) {
             if (tete.getElement() == element) {
